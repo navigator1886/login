@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+    <script src="https://cdn.bootcss.com/jsencrypt/2.3.1/jsencrypt.min.js"></script>
+    <style>
+      html body{
+        background-color: #eeeeee;
+        font: 400 16px/1.5 "Helvetica Neue", "Marmelad", "Lucida Grande", "Hiragino Sans GB", Georgia, "Microsoft YaHei", sans-serif;
+      }
+    </style>
+    <title>buff</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+  <script>
+    //keep input elements stay in view
+    window.onload=function () {
+      var $input = document.getElementsByTagName('input');
+      var getElementPosition = function(elem) {
+        var defaultRect = {top:0,left:0};
+        var rect = (elem.getBoundingClientRect && elem.getBoundingClientRect()) || defaultRect;
+        var ret = {
+          top: rect.top + document.body.scrollTop,
+          left: rect.left + document.body.scrollLeft
+        }
+        return ret;
+      }
+      for(var i = 0; i < $input.length; i++) {
+        $input[i].addEventListener ? $input[i].addEventListener("click",function(){
+          var scroll_val = getElementPosition(this).top;
+          window.scrollTo(0,scroll_val);
+        }, false) : $input[i].attachEvent("onclick", function(){
+          var scroll_val = getElementPosition(this).top;
+          window.scrollTo(0,scroll_val);
+        });
+      }
+
+    }
+  </script>
+</html>
