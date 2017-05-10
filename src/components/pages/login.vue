@@ -26,8 +26,7 @@
     <div id="verification" class="ui-form-item ui-form-item-r ui-border-b">
       <input v-model.trim="imgCode" type="text" name="验证码" placeholder="请输入验证码">
       <!-- 若按钮不可点击则添加 disabled 类 -->
-      <button type="button" class="ui-border"><i class="ui-icon-refresh"></i></button>
-      <!--<a href="#" class="ui-icon-success-block"></a>-->
+      <img src="http://www.login.com/captcha/build?type=default&t=0.4590287449896915" onclick="this.src='http://www.login.com/captcha/build?type=default&t='+Math.random()" alt="点击刷新">
       <a @click="imgCode=''" v-show="imgCode!=''" class="ui-icon-close"></a>
     </div>
     <!--submit button-->
@@ -55,15 +54,14 @@
       postLoginForm(){
         var self = this;
         if(self.formCheck()){
-          let pwd = _52buff.getCode("abcd_1_2_3_4", self.password);
-          let sendData = {userName: self.userName, password: pwd};
+//          let pwd = _52buff.getCode("abcd_1_2_3_4", self.password);
+          let sendData = {userName: self.userName, password:self.password};
           $.post("/host/passport/login/login", sendData, function (rcvData) {
             let msg = rcvData.message;
             $.tips({content: msg, stayTime: 2000, type: "warn"});
           }, "json");
         }
-
-      },
+      }
     }
   }
 </script>
@@ -83,12 +81,15 @@
     margin-top: 20px;
     background-color: #ffffff;
   }
-
-  #verification button {
+  #verification img{
     width: 140px;
-    background: #eeeeee url("https://yun.reg.163.com/czc/cregcp?&t=1492655461254") no-repeat;
+    height: 44px;
+    background-color: #eeeeee;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    right: 0;
   }
-
   #verification .ui-icon-close {
     right: 140px;
     margin-right: 6px;

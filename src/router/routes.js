@@ -8,7 +8,7 @@ import forgetPassword from '../components/pages/common/forgetpassword.vue'
 import resetPassword from '../components/pages/common/resetPassword.vue'
 import test from '../components/pages/test.vue'
 
-let routes =[
+const routes =[
   {
     path:'/',
     redirect: '/login'
